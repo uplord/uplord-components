@@ -2,38 +2,28 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Formik, Form, Field } from 'formik'
 import { z } from 'zod'
 import { toFormikValidationSchema } from 'zod-formik-adapter'
-import { TextArea as TextAreaComponent, TextAreaProps } from '@/components/ui/TextArea'
+import { Radio as RadioComponent, RadioProps } from '@/components/ui/Radio'
 import { Size } from '@/types/size'
 
 const schema = z.object({
-  message: z.string().min(2, 'Must be at least 2 characters').max(1024, 'Must be at most 1024 characters').default(''),
+  message: z.boolean().default(false),
 })
 
-const meta: Meta<TextAreaProps> = {
+const meta: Meta<RadioProps> = {
   title: 'UI',
-  component: TextAreaComponent,
+  component: RadioComponent,
   args: {
     label: 'Textarea',
     name: 'message',
-    placeholder: 'Placeholder',
-    size: Size.Large,
   },
-  argTypes: {
-    size: {
-      control: {
-        type: 'select',
-      },
-      options: Object.values(Size),
-    },
-  }
 }
 
 export default meta
 
-type Story = StoryObj<TextAreaProps>
+type Story = StoryObj<RadioProps>
 
-export const TextArea: Story = {
-  render: (args: TextAreaProps) => (
+export const Radio: Story = {
+  render: (args: RadioProps) => (
     <div className="padding">
       <Formik
         initialValues={{
@@ -46,7 +36,9 @@ export const TextArea: Story = {
         }}
       >
         <Form>
-          <Field component={TextAreaComponent} {...args} />
+          <Field component={RadioComponent} name="radio" id="radio-1" label="Radio 1" />
+          <Field component={RadioComponent} name="radio" id="radio-2" label="Radio 2" />
+          <Field component={RadioComponent} name="radio" id="radio-3" label="Radio 3" />
         </Form>
       </Formik>
     </div>

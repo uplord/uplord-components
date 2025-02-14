@@ -13,24 +13,24 @@ export type TextInputProps = {
   label?: string
   type: 'text' | 'email' | 'password' | 'number'
   name: string
-  id: string
   placeholder?: string
   size?: SizeType
   leadingIcon?: AvailableIcons | null
   trailingIcon?: AvailableIcons | null
-} & FieldProps // Add Formik field props
+} & FieldProps
 
 export const TextInput = ({
   label,
   type = 'text',
-  field, // Formik's field props
-  form, // Formik's form state
+  field,
+  form,
   placeholder,
   size = Size.Medium,
   leadingIcon,
   trailingIcon,
 }: TextInputProps) => {
-  const error = form.touched[field.name] && form.errors[field.name]
+  const error = form.errors[field.name]
+  const errorMessage = typeof error === 'string' ? error : undefined
 
   return (
     <div className={clsx(styles.field, { [styles.error]: error })}>
@@ -39,7 +39,7 @@ export const TextInput = ({
       <div className={clsx(styles.wrap, styles[size])}>
         {leadingIcon && <IconComponent icon={leadingIcon} size={size} className={styles.icon} />}
         <input
-          {...field} // Spread Formik field props (name, value, onChange, onBlur)
+          {...field}
           type={type}
           id={field.name}
           placeholder={placeholder}
@@ -48,7 +48,7 @@ export const TextInput = ({
         {trailingIcon && <IconComponent icon={trailingIcon} size={size} className={styles.icon} />}
       </div>
 
-      {error && <div className={styles.errorMessage}>{error}</div>}
+      {errorMessage && <div className={styles['error-message']}>{errorMessage}</div>}
     </div>
   )
 }

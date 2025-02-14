@@ -3,6 +3,7 @@ import { DM_Sans } from 'next/font/google'
 import { useGlobals } from '@storybook/preview-api'
 
 import '../src/styles/index.scss'
+import '../src/styles/_storybook.scss'
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -25,10 +26,6 @@ const preview = {
         {
           name: 'Light',
           value: '#FFF',
-        },
-        {
-          name: 'Dark',
-          value: '#0d0d0d',
         },
       ],
     },

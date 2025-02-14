@@ -2,25 +2,20 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Formik, Form, Field } from 'formik'
 import { z } from 'zod'
 import { toFormikValidationSchema } from 'zod-formik-adapter'
-import { Select as SelectComponent, SelectProps } from '@/components/ui/Select'
+import { Checkbox as CheckboxComponent, CheckboxProps } from '@/components/ui/Checkbox'
 import { Size } from '@/types/size'
 
 const schema = z.object({
-  select: z.string().min(1, 'Please select an option').default(''),
+  message: z.boolean().default(false),
 })
 
-const meta: Meta<SelectProps> = {
+const meta: Meta<CheckboxProps> = {
   title: 'UI',
-  component: SelectComponent,
+  component: CheckboxComponent,
   args: {
-    label: 'Select',
-    name: 'select',
+    label: 'Textarea',
+    name: 'message',
     size: Size.Large,
-    options: [
-      { label: 'Option 1', value: 'option1' },
-      { label: 'Option 2', value: 'option2' },
-      { label: 'Option 3', value: 'option3' }
-    ]
   },
   argTypes: {
     size: {
@@ -34,14 +29,14 @@ const meta: Meta<SelectProps> = {
 
 export default meta
 
-type Story = StoryObj<SelectProps>
+type Story = StoryObj<CheckboxProps>
 
-export const Select: Story = {
-  render: (args: SelectProps) => (
+export const Checkbox: Story = {
+  render: (args: CheckboxProps) => (
     <div className="padding">
       <Formik
         initialValues={{
-          select: '',
+          message: '',
         }}
         validationSchema={toFormikValidationSchema(schema)}
         onSubmit={async (values) => {
@@ -50,7 +45,7 @@ export const Select: Story = {
         }}
       >
         <Form>
-          <Field component={SelectComponent} {...args} />
+          <Field component={CheckboxComponent} {...args} />
         </Form>
       </Formik>
     </div>

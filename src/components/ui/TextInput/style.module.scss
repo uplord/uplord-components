@@ -1,13 +1,19 @@
 @use '../../../styles/includes' as *;
 
 .field {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+
+  &.error .wrap {
+    border-color: $color-error;
+  }
 
   label {
     @include text-sm;
     @include text-normal;
 
     display: block;
-    padding: 0 0 $spacing-sm;
   }
 
   textarea {
@@ -49,7 +55,72 @@
   }
 }
 
+.checkbox {
+  display: flex;
+  align-items: center;
+
+  input[type="checkbox"] {
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 1px solid $color-border;
+    border-radius: 0.25rem;
+    appearance: none;
+
+    &:hover {
+      border-color: $color-border-hover;
+    }
+
+    &:checked {
+      background: $color-primary;
+      border-color: $color-primary;
+    }
+  }
+
+  label {
+    @include text-sm;
+    @include text-normal;
+
+    padding-left: 0.5rem;
+  }
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+
+  input[type="radio"] {
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 1px solid $color-border;
+    border-radius: 0.75rem;
+    appearance: none;
+
+    &:hover {
+      border-color: $color-border-hover;
+    }
+
+    &:checked {
+      background: $color-primary;
+      border-color: $color-primary;
+    }
+  }
+
+  label {
+    @include text-sm;
+    @include text-normal;
+
+    padding-left: 0.5rem;
+  }
+}
+
 .icon {
   color: $color-text;
   opacity: 0.5;
+}
+
+.error-message {
+  @include text-sm;
+  @include text-normal;
+
+  color: $color-error;
 }
