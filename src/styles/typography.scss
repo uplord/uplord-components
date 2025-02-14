@@ -1,0 +1,22 @@
+@mixin text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+@mixin text-md {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+@mixin text-lg {
+  font-size: 1.1875rem;
+  line-height: 1.75rem;
+}
+
+@mixin text-bold {
+  font-weight: bold;
+}
+
+@mixin text-normal {
+  font-weight: normal;
+}

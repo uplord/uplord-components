@@ -1,0 +1,73 @@
+@use 'sass:color';
+@use '../../../styles/includes' as *;
+
+.group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.button {
+  @include button-size;
+  @include button-variant;
+
+  & {
+    position: relative;
+    display: flex;
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 500;
+    border: 1px solid transparent;
+    border-radius: 0.5em;
+    text-decoration: none;
+    transition:
+      transform 0.3s ease,
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  &:focus {
+    outline: 2px solid $color-dark;
+    outline-offset: 2px;
+
+    @include dark-mode {
+      outline-color: $color-light;
+      outline-offset: 3px;
+    }
+  }
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.is-loading {
+  .content {
+    opacity: 0;
+  }
+}
+
+.loading {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  animation: rotate-loading 2s linear infinite;
+}
+
+@keyframes rotate-loading {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}

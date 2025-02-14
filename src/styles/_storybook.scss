@@ -1,0 +1,5 @@
+@use './variables' as *;
+
+.padding {
+  padding: $spacing-md $spacing-lg;
+}

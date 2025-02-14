@@ -1,0 +1,83 @@
+@use 'sass:color';
+
+$font-heading: 'DM Sans', Arial, sans-serif;
+$font-body: Arial, sans-serif;
+
+$width-max: 1432px;
+$width-xl: 2032px;
+
+$breakpoint-sm: 400px;
+$breakpoint-md: 744px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 2032px;
+
+$color-light: #fff;
+$color-dark: #000;
+
+// Primary color scheme
+$color-default: #000;
+$color-default-hover: color.adjust($color-default, $lightness: -10%);
+$color-default-text: #fff;
+
+$color-default-dark: #fff;
+$color-default-hover-dark: color.adjust($color-default-dark, $lightness: 10%);
+$color-default-text-dark: #000;
+
+// Primary color scheme
+$color-primary: #dd2121;
+$color-primary-hover: color.adjust($color-primary, $lightness: -10%);
+$color-primary-text: #fff;
+
+$color-success: #29a027;
+$color-error: #dd2121;
+$color-warning: #fc0;
+$color-info: #1164cc;
+$color-rebecca: rebeccapurple;
+
+// Light theme colors
+$color-bg: #fff;
+$color-heading: #000;
+$color-text: #333;
+
+$color-border: #ddd;
+$color-border-hover: #aaa;
+
+$color-svg: #000;
+$color-block: #f7f7f7;
+$color-tooltip: #0d0d0d;
+$color-tooltip-text: #fff;
+
+// Dark theme colors
+$color-bg-dark: #0d0d0d;
+$color-heading-dark: #fff;
+$color-text-dark: #bdc1c6;
+
+$color-border-dark: #2b2b2b;
+
+$color-svg-dark: #fff;
+$color-block-dark: #1a1a1a;
+$color-tooltip-dark: #fff;
+$color-tooltip-text-dark: #000;
+
+$color-header: $color-info;
+$color-nav: color.adjust($color-header, $lightness: -10%);
+$color-nav-text: #fff;
+$color-nav-hover: #fff;
+$color-nav-hover-text: inherit;
+
+$color-header-dark: #0d0d0d;
+$color-nav-dark: color.adjust($color-header-dark, $lightness: 10%);
+$color-nav-text-dark: #fff;
+$color-nav-hover-dark: #fff;
+$color-nav-hover-text-dark: #312e2c;
+
+// Add your sun and moon colors here
+$color-sun: #ffd43b;
+$color-moon: #74c0fc;
+
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-ms: 0.75rem; 
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;

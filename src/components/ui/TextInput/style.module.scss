@@ -1,0 +1,55 @@
+@use '../../../styles/includes' as *;
+
+.field {
+
+  label {
+    @include text-sm;
+    @include text-normal;
+
+    display: block;
+    padding: 0 0 $spacing-sm;
+  }
+
+  textarea {
+    min-height: 8rem;
+    resize: none;
+  }
+}
+
+.wrap {
+  @include input-size;
+
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-md;
+  border: 1px solid $color-border;
+  border-radius: $spacing-xs;
+
+  &:hover {
+    border-color: $color-border-hover;
+  }
+
+  &:focus-within {
+    outline: 2px solid $color-text;
+    outline-offset: 3px;
+  }
+}
+
+.input {
+  @include text-md;
+  @include text-normal;
+
+  flex: 1;
+  appearance: none;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.icon {
+  color: $color-text;
+  opacity: 0.5;
+}

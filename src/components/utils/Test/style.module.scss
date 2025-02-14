@@ -1,0 +1,11 @@
+@use '../../../styles/includes' as *;
+
+.test {
+  background: red;
+  padding: $spacing-md $spacing-lg;
+}
+
+.text {
+  @include text-md;
+  @include text-bold;
+}
