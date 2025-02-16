@@ -26,8 +26,6 @@ const trailingFuction = () => {
 const meta: Meta<InputProps> = {
   title: 'UI/Input',
   component: InputComponent,
-  args: {
-  },
   argTypes: {
     leadingIcon: {
       control: {
@@ -82,53 +80,69 @@ export default meta
 type Story = StoryObj<InputProps>
 
 export const Default: Story = {
-  render: () => (
+  args: {
+    placeholder: 'Label',
+    helper: 'Optional helper text',
+  },
+  render: (args: InputProps) => (
     <Field
+      {...args}
       component={InputComponent}
       name="input"
-      placeholder="Label"
-      helper="Optional helper text"
     />
   )
 }
 
 export const Hover: Story = {
-  render: () => (
+  args: {
+    placeholder: 'Label',
+    helper: 'Optional helper text',
+    isHover: true,
+  },
+  render: (args: InputProps) => (
     <Field
+      {...args}
       component={InputComponent}
       name="input"
-      placeholder="Label"
-      helper="Optional helper text"
-      isHover={true}
     />
   )
 }
 
 export const Focus: Story = {
-  render: () => (
+  args: {
+    placeholder: 'Label',
+    helper: 'Optional helper text',
+    isFocus: true,
+  },
+  render: (args: InputProps) => (
     <Field
+      {...args}
       component={InputComponent}
       name="input"
-      placeholder="Label"
-      helper="Optional helper text"
-      isFocus={true}
     />
   )
 }
 
 export const Disabled: Story = {
-  render: () => (
+  args: {
+    placeholder: 'Label',
+    helper: 'Optional helper text',
+    disabled: true,
+  },
+  render: (args: InputProps) => (
     <Field
+      {...args}
       component={InputComponent}
       name="input"
-      placeholder="Label"
-      helper="Optional helper text"
-      disabled={true}
     />
   )
 }
 
 export const Filled: Story = {
+  args: {
+    placeholder: 'Label',
+    helper: 'Optional helper text',
+  },
   decorators: [
     (Story) => {
       return (
@@ -151,95 +165,115 @@ export const Filled: Story = {
       )
     },
   ],
-  render: () => (
+  render: (args: InputProps) => (
     <Field
+      {...args}
       component={InputComponent}
       name="input"
-      placeholder="Label"
-      helper="Optional helper text"
     />
   )
 }
 
-
 export const Error: Story = {
-  render: () => (
+  args: {
+    placeholder: 'Label',
+    helper: 'Optional helper text',
+    isError: true,
+  },
+  render: (args: InputProps) => (
     <Field
+      {...args}
       component={InputComponent}
       name="input"
-      placeholder="Label"
-      helper="Optional helper text"
-      isError={true}
     />
   )
 }
 
 export const ErrorFocus: Story = {
-  render: () => (
+  args: {
+    placeholder: 'Label',
+    helper: 'Optional helper text',
+    isFocus: true,
+    isError: true,
+  },
+  render: (args: InputProps) => (
     <Field
+      {...args}
       component={InputComponent}
       name="input"
-      placeholder="Label"
-      helper="Optional helper text"
-      isFocus={true}
-      isError={true}
     />
   )
 }
 
 export const LeadingText: Story = {
-  render: () => (
+  args: {
+    placeholder: 'Label',
+    helper: 'Optional helper text',
+    leadingText: '£',
+  },
+  render: (args: InputProps) => (
     <Field
+      {...args}
       component={InputComponent}
       name="input"
-      placeholder="Label"
-      helper="Optional helper text"
-      leadingText="£"
     />
   )
 }
 
 export const LeadingIcon: Story = {
-  render: () => (
+  args: {
+    placeholder: 'Label',
+    helper: 'Optional helper text',
+    leadingIcon: 'X',
+    leadingFuction: leadingFuction,
+  },
+  render: (args: InputProps) => (
     <Field
+      {...args}
       component={InputComponent}
       name="input"
-      placeholder="Label"
-      helper="Optional helper text"
-      leadingIcon="X"
-      leadingFuction={leadingFuction}
     />
   )
 }
 
 export const TrailingIcon: Story = {
-  render: () => (
+  args: {
+    placeholder: 'Label',
+    helper: 'Optional helper text',
+    trailingIcon: 'Home',
+    trailingFuction: trailingFuction,
+  },
+  render: (args: InputProps) => (
     <Field
+      {...args}
       component={InputComponent}
       name="input"
-      placeholder="Label"
-      helper="Optional helper text"
-      trailingIcon="Home"
-      trailingFuction={trailingFuction}
     />
   )
 }
 
 export const Password: Story = {
-  render: () => (
+  args: {
+    type: 'password',
+    placeholder: 'Label',
+    helper: 'Optional helper text',
+  },
+  render: (args: InputProps) => (
     <Field
+      {...args}
       component={InputComponent}
       name="input"
-      type="password"
-      placeholder="Label"
-      helper="Optional helper text"
     />
   )
 }
 
 export const NoLabel: Story = {
-  render: () => (
+  args: {
+    helper: 'Optional helper text',
+  },
+  render: (args: InputProps) => (
     <Field
+      {...args}
       component={InputComponent}
       name="input"
       helper="Optional helper text"
@@ -272,25 +306,33 @@ export const Register: Story = {
       )
     },
   ],
-  render: () => (
-    <div className={styles.fields}>
-      <Field
-        component={InputComponent}
-        placeholder="Full Name"
-        name="fullName"
-      />
-      <Field
-        component={InputComponent}
-        placeholder="Email Address"
-        name="email"
-        type="email"
-      />
-      <Field
-        component={InputComponent}
-        placeholder="Password"
-        name="password"
-        type="password"
-      />
-    </div>
-  )
+  render: (args: InputProps) => {
+
+    return (
+      <div className={styles.fields}>
+        <Field
+          {...args}
+          component={InputComponent}
+          placeholder="Full Name"
+          name="fullName"
+          trailingIcon={'User'}
+        />
+        <Field
+          {...args}
+          component={InputComponent}
+          placeholder="Email Address"
+          name="email"
+          type="email"
+          trailingIcon={'Mail'}
+        />
+        <Field
+          {...args}
+          component={InputComponent}
+          placeholder="Password"
+          name="password"
+          type="password"
+        />
+      </div>
+    )
+  }
 }

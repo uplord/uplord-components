@@ -110,7 +110,7 @@ export const Input = ({
           </div>
         ) : trailingIcon && <IconComponent icon={trailingIcon} size={Size.Medium} className={styles.icon} />}
       </div>
-      {errorMessage || helper && (
+      {(errorMessage || helper) && (
         <div className={styles.helper}>{errorMessage ? errorMessage : helper}</div>
       )}
     </div>
