@@ -89,7 +89,7 @@ export const Input = ({
             type={type === 'password' && isPasswordVisible ? 'text' : type}
             id={field.name}
             className={styles.input}
-            placeholder=""
+            placeholder=" "
             required
             disabled={disabled}
           />
