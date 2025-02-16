@@ -14,7 +14,8 @@
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "babel": "npx babel src --out-dir dist --extensions .ts,.tsx && npx cpx 'src/**/*.scss' dist/"
+    "babel": "npx babel src --out-dir dist --extensions .ts,.tsx && npx cpx 'src/**/*.scss' dist/",
+    "chromatic": "chromatic --exit-zero-on-changes"
   },
   "dependencies": {
     "clsx": "^2.1.1",
