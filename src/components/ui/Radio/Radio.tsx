@@ -3,7 +3,6 @@ import { FieldProps } from 'formik'
 import clsx from 'clsx'
 
 import styles from '../TextInput/style.module.scss'
-import { Size, SizeType } from '@/types/size'
 
 export type RadioProps = {
   label: string

@@ -1,0 +1,157 @@
+@use '../../../styles/includes' as *;
+
+$stroke: #ddd;
+$text-body: #5d5d5d;
+$text-title: #222;
+$color-neutral-01: #f7f7f7;
+$color-neutral-07: #717171;
+$color-shade-02: #222;
+$color-disabled: #ddd;
+
+$color-error-01: #FEF8F6;
+$color-error-02: #C13515;
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+
+  svg {
+    color: $text-title;
+  }
+}
+
+.outer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.96875rem 1rem;
+  border: 1px solid $stroke;
+  border-radius: 0.5rem;
+
+  &:hover,
+  &.hover {
+    background: $color-neutral-01;
+    cursor: text;
+  }
+
+  &:focus-within,
+  &.focus {
+    background: $color-neutral-01;
+    outline: 2px solid $color-shade-02;
+    outline-offset: -2px;
+  }
+
+  &.disabled {
+    background: $color-disabled;
+    border-color: $color-disabled;
+
+    .input {
+
+      &:focus-within,
+      &.focus {
+        outline: 0;
+      }
+    }
+  }
+}
+
+.inner {
+  position: relative;
+  flex: 1;
+  line-height: 1.4375rem;
+}
+
+.input {
+  position: relative;
+  width: 100%;
+  background: transparent;
+  color: $text-title;
+  font-size: 1rem;
+  line-height: 1.4375rem;
+  transition: all 0.3s ease-in-out;
+
+  &:focus {
+    outline: 0;
+  }
+
+  &:focus,
+  .focus &,
+  &:not(:placeholder-shown) {
+    top: 0.46875rem;
+
+    & + span {
+      font-size: 0.75rem;
+      line-height: 0.875rem;
+      padding: 0;
+      top: -0.40625rem;
+      color: $text-body;
+    }
+  }
+
+  & + span {
+    font-size: 1rem;
+    line-height: 1.4375rem;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all 0.3s ease-in-out;
+    color: $color-neutral-07;
+    pointer-events: none;
+  }
+}
+
+.helper {
+  font-size: 0.75rem;
+  line-height: 0.875rem;
+  color: $color-neutral-07;
+}
+
+.error {
+  
+  .outer {
+    background: $color-error-01;
+    border-color: $color-error-02;
+
+    &:focus,
+    &:not(:placeholder-shown),
+    &.focus {
+      outline-color: $color-error-02;
+    }
+
+    span {
+      color: $color-error-02;
+    }
+  }
+
+  .helper {
+    color: $color-error-02; 
+  }
+}
+
+.text {
+  font-size: 1rem;
+  line-height: 1.4375rem;
+  color: $text-title;
+}
+
+.button {
+  font-size: 0.875rem;
+  line-height: 1.0625rem;
+  text-decoration: underline;
+  margin: -1rem;
+  padding: 1rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

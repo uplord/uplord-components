@@ -2,37 +2,23 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Formik, Form, Field } from 'formik'
 import { z } from 'zod'
 import { toFormikValidationSchema } from 'zod-formik-adapter'
-import { Checkbox as CheckboxComponent, CheckboxProps } from '@/components/ui/Checkbox'
-import { Size } from '@/types/size'
+import { Radio as RadioComponent, RadioProps } from '@/components/ui/Radio'
 
 const schema = z.object({
   message: z.boolean().default(false),
 })
 
-const meta: Meta<CheckboxProps> = {
+const meta: Meta<RadioProps> = {
   title: 'UI',
-  component: CheckboxComponent,
-  args: {
-    label: 'Textarea',
-    name: 'message',
-    size: Size.Large,
-  },
-  argTypes: {
-    size: {
-      control: {
-        type: 'select',
-      },
-      options: Object.values(Size),
-    },
-  }
+  component: RadioComponent,
 }
 
 export default meta
 
-type Story = StoryObj<CheckboxProps>
+type Story = StoryObj<RadioProps>
 
-export const Checkbox: Story = {
-  render: (args: CheckboxProps) => (
+export const Radio: Story = {
+  render: () => (
     <div className="padding">
       <Formik
         initialValues={{
@@ -45,7 +31,9 @@ export const Checkbox: Story = {
         }}
       >
         <Form>
-          <Field component={CheckboxComponent} {...args} />
+          <Field component={RadioComponent} name="radio" id="radio-1" label="Radio 1" />
+          <Field component={RadioComponent} name="radio" id="radio-2" label="Radio 2" />
+          <Field component={RadioComponent} name="radio" id="radio-3" label="Radio 3" />
         </Form>
       </Formik>
     </div>
