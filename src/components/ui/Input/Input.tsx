@@ -42,36 +42,44 @@ export const Input = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
-  const error = isError || form.errors[field.name]
-  const errorMessage = isError ? 'Error text' : (typeof error === 'string' ? error : undefined)
+  const hasError = isError || form.errors[field.name] && form.touched[field.name]
+  const errorMessage = hasError
+  ? Array.isArray(form.errors[field.name])
+    ? (form.errors[field.name] as string[]).join(', ')
+    : (form.errors[field.name] as string)
+  : undefined
 
   const handleFocus = () => {
     inputRef.current?.focus()
   }
 
-  const showButton = (event: { stopPropagation: () => void }) => {
+  const visibleClick = (event: { stopPropagation: () => void }) => {
     event.stopPropagation()
     setIsPasswordVisible(prev => !prev)
   }
 
+  const clearField = () => {
+    form.setFieldValue(field.name, '')
+    form.setFieldTouched(field.name, false)
+    form.setFieldError(field.name, undefined)
+  }
+
   const leadingClick = (event: { stopPropagation: () => void }) => {
     event.stopPropagation()
-    if (leadingFuction) {
-      leadingFuction()
-    }
+    if (leadingIcon === 'X') clearField()
+    leadingFuction?.()
   }
 
   const trailingClick = (event: { stopPropagation: () => void }) => {
     event.stopPropagation()
-    if (trailingFuction) {
-      trailingFuction()
-    }
+    if (trailingIcon === 'X') clearField()
+    trailingFuction?.()
   }
  
   return (
     <div className={clsx(
       styles.field,
-      { [styles.error]: error },
+      { [styles.error]: hasError },
       !placeholder && styles['no-label']
     )}>
       <div className={clsx(
@@ -80,11 +88,11 @@ export const Input = ({
         isFocus && styles.focus,
         disabled && styles.disabled,
       )} onClick={handleFocus}>
-        {(leadingFuction && leadingIcon) ? (
+        {leadingIcon && (
           <div className={styles.button} onClick={leadingClick}>
             <IconComponent icon={leadingIcon} size={Size.Medium} className={styles.icon} />
           </div>
-        ) : leadingIcon && <IconComponent icon={leadingIcon} size={Size.Medium} className={styles.icon} />}
+        )}
         {leadingText && <div className={styles.text}>{leadingText}</div>}
         <div className={styles.inner}>
           <input
@@ -100,18 +108,18 @@ export const Input = ({
           <span>{placeholder}</span>
         </div>
         {type === 'password' && (
-          <button type="button" onClick={showButton} className={styles.button}>
+          <button type="button" onClick={visibleClick} className={styles.button}>
             {isPasswordVisible ? 'Hide' : 'Show'}
           </button>
         )}
-        {(trailingFuction && trailingIcon) ? (
+        {trailingIcon && (
           <div className={styles.button} onClick={trailingClick}>
             <IconComponent icon={trailingIcon} size={Size.Medium} className={styles.icon} />
           </div>
-        ) : trailingIcon && <IconComponent icon={trailingIcon} size={Size.Medium} className={styles.icon} />}
+        )}
       </div>
       {(errorMessage || helper) && (
-        <div className={styles.helper}>{errorMessage ? errorMessage : helper}</div>
+        <div className={styles.helper}>{errorMessage ?? helper}</div>
       )}
     </div>
   )

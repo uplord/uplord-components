@@ -12,7 +12,11 @@ import { Input as InputComponent, InputProps } from '@/components/ui/Input'
 type AvailableIcons = keyof typeof icons
 
 const schema = z.object({
-  input: z.string().min(2, 'Must be at least 2 characters').max(50, 'Must be at most 50 characters').default(''),
+  input: z
+    .string()
+    .min(2, 'Must be at least 2 characters')
+    .max(50, 'Must be at most 50 characters')
+    .default(''),
 })
 
 const leadingFuction = () => {
@@ -224,7 +228,7 @@ export const LeadingIcon: Story = {
   args: {
     placeholder: 'Label',
     helper: 'Optional helper text',
-    leadingIcon: 'X',
+    leadingIcon: 'AlarmClock',
     leadingFuction: leadingFuction,
   },
   render: (args: InputProps) => (
@@ -241,6 +245,22 @@ export const TrailingIcon: Story = {
     placeholder: 'Label',
     helper: 'Optional helper text',
     trailingIcon: 'Home',
+    trailingFuction: trailingFuction,
+  },
+  render: (args: InputProps) => (
+    <Field
+      {...args}
+      component={InputComponent}
+      name="input"
+    />
+  )
+}
+
+export const TrailingIconClear: Story = {
+  args: {
+    placeholder: 'Label',
+    helper: 'Optional helper text',
+    trailingIcon: 'X',
     trailingFuction: trailingFuction,
   },
   render: (args: InputProps) => (
@@ -284,6 +304,25 @@ export const NoLabel: Story = {
 export const Register: Story = {
   decorators: [
     (Story) => {
+      const registerShema = z.object({
+        fullName: z
+          .string()
+          .min(2, 'Must be at least 2 characters')
+          .max(50, 'Must be at most 50 characters')
+          .default(''),
+        email: z
+          .string()
+          .email('Invalid email format')
+          .min(5, 'Must be at least 5 characters')
+          .max(50, 'Must be at most 50 characters')
+          .default(''),
+        password: z
+          .string()
+          .min(8, 'Password must be at least 8 characters')
+          .max(50, 'Must be at most 50 characters')
+          .default(''),
+      })
+
       return (
         <Formik
           initialValues={{
@@ -291,7 +330,7 @@ export const Register: Story = {
             email: '',
             password: '',
           }}
-          validationSchema={toFormikValidationSchema(schema)}
+          validationSchema={toFormikValidationSchema(registerShema)}
           onSubmit={async (values) => {
             await new Promise((r) => setTimeout(r, 500));
             alert(JSON.stringify(values, null, 2));

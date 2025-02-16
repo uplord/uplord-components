@@ -154,8 +154,10 @@ $color-error-02: #C13515;
   text-decoration: underline;
   margin: -1.15625rem -1rem;
   padding: 1.15625rem 1rem;
+  transition: all 0.3s ease-in-out;
 
   &:hover {
     cursor: pointer;
+    transform: scale(1.1);
   }
 }
