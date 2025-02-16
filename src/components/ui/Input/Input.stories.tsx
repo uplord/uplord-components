@@ -5,6 +5,8 @@ import { z } from 'zod'
 import { toFormikValidationSchema } from 'zod-formik-adapter'
 import * as icons from 'lucide-react'
 
+import styles from './style.module.scss'
+
 import { Input as InputComponent, InputProps } from '@/components/ui/Input'
 
 type AvailableIcons = keyof typeof icons
@@ -25,7 +27,6 @@ const meta: Meta<InputProps> = {
   title: 'UI/Input',
   component: InputComponent,
   args: {
-    placeholder: 'Label',
   },
   argTypes: {
     leadingIcon: {
@@ -43,7 +44,7 @@ const meta: Meta<InputProps> = {
   },
   decorators: [
     (Story, context) => {
-      if (context.name === 'Filled') {
+      if (context.name === 'Filled' || context.name === 'Register') {
         return (
           <div className="padding">
             <Story />
@@ -81,64 +82,53 @@ export default meta
 type Story = StoryObj<InputProps>
 
 export const Default: Story = {
-  args: {
-    helper: 'Optional helper text',
-  },
-  render: (args: InputProps) => (
+  render: () => (
     <Field
       component={InputComponent}
       name="input"
-      {...args}
+      placeholder="Label"
+      helper="Optional helper text"
     />
   )
 }
 
 export const Hover: Story = {
-  args: {
-    helper: 'Optional helper text',
-    isHover: true,
-  },
-  render: (args: InputProps) => (
+  render: () => (
     <Field
       component={InputComponent}
       name="input"
-      {...args}
+      placeholder="Label"
+      helper="Optional helper text"
+      isHover={true}
     />
   )
 }
 
 export const Focus: Story = {
-  args: {
-    helper: 'Optional helper text',
-    isFocus: true,
-  },
-  render: (args: InputProps) => (
+  render: () => (
     <Field
       component={InputComponent}
       name="input"
-      {...args}
+      placeholder="Label"
+      helper="Optional helper text"
+      isFocus={true}
     />
   )
 }
 
 export const Disabled: Story = {
-  args: {
-    helper: 'Optional helper text',
-    disabled: true,
-  },
-  render: (args: InputProps) => (
+  render: () => (
     <Field
       component={InputComponent}
       name="input"
-      {...args}
+      placeholder="Label"
+      helper="Optional helper text"
+      disabled={true}
     />
   )
 }
 
 export const Filled: Story = {
-  args: {
-    helper: 'Optional helper text',
-  },
   decorators: [
     (Story) => {
       return (
@@ -161,99 +151,146 @@ export const Filled: Story = {
       )
     },
   ],
-  render: (args: InputProps) => (
+  render: () => (
     <Field
       component={InputComponent}
       name="input"
-      {...args}
+      placeholder="Label"
+      helper="Optional helper text"
     />
   )
 }
 
 
 export const Error: Story = {
-  args: {
-    helper: 'Optional helper text',
-    isError: true,
-  },
-  render: (args: InputProps) => (
+  render: () => (
     <Field
       component={InputComponent}
       name="input"
-      {...args}
+      placeholder="Label"
+      helper="Optional helper text"
+      isError={true}
     />
   )
 }
 
 export const ErrorFocus: Story = {
-  args: {
-    helper: 'Optional helper text',
-    isFocus: true,
-    isError: true,
-  },
-  render: (args: InputProps) => (
+  render: () => (
     <Field
       component={InputComponent}
       name="input"
-      {...args}
+      placeholder="Label"
+      helper="Optional helper text"
+      isFocus={true}
+      isError={true}
     />
   )
 }
 
 export const LeadingText: Story = {
-  args: {
-    helper: 'Optional helper text',
-    leadingText: '£',
-  },
-  render: (args: InputProps) => (
+  render: () => (
     <Field
       component={InputComponent}
       name="input"
-      {...args}
+      placeholder="Label"
+      helper="Optional helper text"
+      leadingText="£"
     />
   )
 }
 
 export const LeadingIcon: Story = {
-  args: {
-    helper: 'Optional helper text',
-    leadingIcon: 'X',
-    leadingFuction: leadingFuction,
-  },
-  render: (args: InputProps) => (
+  render: () => (
     <Field
       component={InputComponent}
       name="input"
-      {...args}
+      placeholder="Label"
+      helper="Optional helper text"
+      leadingIcon="X"
+      leadingFuction={leadingFuction}
     />
   )
 }
 
 export const TrailingIcon: Story = {
-  args: {
-    helper: 'Optional helper text',
-    trailingIcon: 'Home',
-    trailingFuction: trailingFuction,
-  },
-  render: (args: InputProps) => (
+  render: () => (
     <Field
       component={InputComponent}
       name="input"
-      {...args}
+      placeholder="Label"
+      helper="Optional helper text"
+      trailingIcon="Home"
+      trailingFuction={trailingFuction}
     />
   )
 }
 
 export const Password: Story = {
-  args: {
-    helper: 'Optional helper text',
-    type: 'password',
-  },
-  render: (args: InputProps) => (
+  render: () => (
     <Field
       component={InputComponent}
       name="input"
-      {...args}
+      type="password"
+      placeholder="Label"
+      helper="Optional helper text"
     />
+  )
+}
+
+export const NoLabel: Story = {
+  render: () => (
+    <Field
+      component={InputComponent}
+      name="input"
+      helper="Optional helper text"
+    />
+  )
+}
+
+export const Register: Story = {
+  decorators: [
+    (Story) => {
+      return (
+        <Formik
+          initialValues={{
+            fullName: '',
+            email: '',
+            password: '',
+          }}
+          validationSchema={toFormikValidationSchema(schema)}
+          onSubmit={async (values) => {
+            await new Promise((r) => setTimeout(r, 500));
+            alert(JSON.stringify(values, null, 2));
+          }}
+        >
+          {() => (
+            <Form>
+              <Story />
+            </Form>
+          )}
+        </Formik>
+      )
+    },
+  ],
+  render: () => (
+    <div className={styles.fields}>
+      <Field
+        component={InputComponent}
+        placeholder="Full Name"
+        name="fullName"
+      />
+      <Field
+        component={InputComponent}
+        placeholder="Email Address"
+        name="email"
+        type="email"
+      />
+      <Field
+        component={InputComponent}
+        placeholder="Password"
+        name="password"
+        type="password"
+      />
+    </div>
   )
 }

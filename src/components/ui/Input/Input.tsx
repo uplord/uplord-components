@@ -69,7 +69,11 @@ export const Input = ({
   }
  
   return (
-    <div className={clsx(styles.field, { [styles.error]: error })}>
+    <div className={clsx(
+      styles.field,
+      { [styles.error]: error },
+      !placeholder && styles['no-label']
+    )}>
       <div className={clsx(
         styles.outer,
         isHover && styles.hover,
@@ -106,7 +110,9 @@ export const Input = ({
           </div>
         ) : trailingIcon && <IconComponent icon={trailingIcon} size={Size.Medium} className={styles.icon} />}
       </div>
-      <div className={styles.helper}>{errorMessage ? errorMessage : helper && 'Optional helper text'}</div>
+      {errorMessage || helper && (
+        <div className={styles.helper}>{errorMessage ? errorMessage : helper}</div>
+      )}
     </div>
   )
 }

@@ -88,6 +88,10 @@ $color-error-02: #C13515;
   &:not(:placeholder-shown) {
     top: 0.46875rem;
 
+    .no-label & {
+      top: 0;
+    }
+
     & + span {
       font-size: 0.75rem;
       line-height: 0.875rem;
