@@ -2,44 +2,38 @@
 @use '../../../styles/includes' as *;
 
 .group {
+  width: 100%;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 1rem;
 }
 
 .button {
   @include button-size;
   @include button-variant;
+  @include text-semibold;
 
   & {
     position: relative;
     display: flex;
-    font-size: 1rem;
-    line-height: 1.5;
-    font-weight: 500;
     border: 1px solid transparent;
     border-radius: 0.5em;
     text-decoration: none;
     transition:
-      transform 0.3s ease,
-      background-color 0.3s ease,
-      color 0.3s ease;
+      transform 0.2s ease,
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease;
   }
 
-  @media (hover: hover) {
-    &:hover {
-      transform: scale(1.05);
-    }
+  &:active {
+    transform: scale(0.95);
   }
 
-  &:focus {
+  &:focus-visible {
     outline: 2px solid $color-dark;
     outline-offset: 2px;
-
-    @include dark-mode {
-      outline-color: $color-light;
-      outline-offset: 3px;
-    }
   }
 }
 
@@ -61,13 +55,13 @@
   top: 50%;
   transform: translate(-50%, -50%);
   animation: rotate-loading 2s linear infinite;
+  color: $text-title;
 }
 
-@keyframes rotate-loading {
-  0% {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(360deg);
+.is-ghost {
+  animation: ghost 1.4s linear infinite;
+
+  .content {
+    opacity: 0;
   }
 }

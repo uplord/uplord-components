@@ -61,11 +61,17 @@ const preview = {
         },
       },
     },
+    pseudo: {
+      hover: '.hover',
+      focus: '.focus',
+      active: '.active',
+      'focus-visible': '.focus-visible',
+      'focus-within': '.focus-within',
+    },
     chromatic: {
       disableSnapshot: true,
     },
   },
-  // tags: ['autodocs'],
   decorators: [
     (Story) => {
       const [globals] = useGlobals()

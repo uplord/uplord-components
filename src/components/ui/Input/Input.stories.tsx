@@ -1,35 +1,39 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { Formik, Form, Field } from 'formik'
 
-import { z } from 'zod'
-import { toFormikValidationSchema } from 'zod-formik-adapter'
 import * as icons from 'lucide-react'
 
 import styles from './style.module.scss'
 
 import { Input as InputComponent, InputProps } from '@/components/ui/Input'
+import { Variant } from '@/types/button'
+import { Size } from '@/types/size'
 
 type AvailableIcons = keyof typeof icons
 
-const schema = z.object({
-  input: z
-    .string()
-    .min(2, 'Must be at least 2 characters')
-    .max(50, 'Must be at most 50 characters')
-    .default(''),
-})
-
-const leadingFuction = () => {
-  console.log('leadingFuction') 
+const leadingFunction = () => {
+  alert('leadingFunction') 
 }
 
-const trailingFuction = () => {
-  console.log('trailingFuction') 
+const trailingFunction = () => {
+  alert('trailingFunction') 
 }
 
 const meta: Meta<InputProps> = {
   title: 'UI/Input',
   component: InputComponent,
+  args: {
+    type: 'text',
+    placeholder: 'Label',
+    helper: 'Optional helper text',
+    leadingIcon: '',
+    leadingText: '',
+    trailingIcon: '',
+    isLoading: false,
+    isGhost: false,
+    isDisabled: false,
+    isError: false,
+  },
   argTypes: {
     leadingIcon: {
       control: {
@@ -37,11 +41,31 @@ const meta: Meta<InputProps> = {
       },
       options: [null, ...Object.keys(icons)] as (AvailableIcons)[],
     },
+    leadingFunction: {
+      table: {
+        disable: true,
+      },
+    },
     trailingIcon: {
       control: {
         type: 'select',
       },
       options: [null, ...Object.keys(icons)] as (AvailableIcons)[],
+    },
+    trailingFunction: {
+      table: {
+        disable: true,
+      },
+    },
+    trailingButton: {
+      table: {
+        disable: true,
+      },
+    },
+    className: {
+      table: {
+        disable: true,
+      },
     },
   },
   decorators: [
@@ -58,9 +82,8 @@ const meta: Meta<InputProps> = {
         <div className="padding">
           <Formik
             initialValues={{
-              input: '',
+              filled: 'Filled'
             }}
-            validationSchema={toFormikValidationSchema(schema)}
             onSubmit={async (values) => {
               await new Promise((r) => setTimeout(r, 500));
               alert(JSON.stringify(values, null, 2));
@@ -83,11 +106,7 @@ export default meta
 
 type Story = StoryObj<InputProps>
 
-export const Default: Story = {
-  args: {
-    placeholder: 'Label',
-    helper: 'Optional helper text',
-  },
+export const Input: Story = {
   render: (args: InputProps) => (
     <Field
       {...args}
@@ -97,281 +116,148 @@ export const Default: Story = {
   )
 }
 
-export const Hover: Story = {
+export const State: Story = {
   args: {
-    placeholder: 'Label',
-    helper: 'Optional helper text',
-    isHover: true,
-  },
-  render: (args: InputProps) => (
-    <Field
-      {...args}
-      component={InputComponent}
-      name="input"
-    />
-  )
-}
-
-export const Focus: Story = {
-  args: {
-    placeholder: 'Label',
-    helper: 'Optional helper text',
-    isFocus: true,
-  },
-  render: (args: InputProps) => (
-    <Field
-      {...args}
-      component={InputComponent}
-      name="input"
-    />
-  )
-}
-
-export const Disabled: Story = {
-  args: {
-    placeholder: 'Label',
-    helper: 'Optional helper text',
-    disabled: true,
-  },
-  render: (args: InputProps) => (
-    <Field
-      {...args}
-      component={InputComponent}
-      name="input"
-    />
-  )
-}
-
-export const Filled: Story = {
-  args: {
-    placeholder: 'Label',
     helper: 'Optional helper text',
   },
-  decorators: [
-    (Story) => {
-      return (
-        <Formik
-          initialValues={{
-            input: 'Filled',
-          }}
-          validationSchema={toFormikValidationSchema(schema)}
-          onSubmit={async (values) => {
-            await new Promise((r) => setTimeout(r, 500));
-            alert(JSON.stringify(values, null, 2));
-          }}
-        >
-          {() => (
-            <Form>
-              <Story />
-            </Form>
-          )}
-        </Formik>
-      )
+  parameters: {
+    controls: {
+      disable: true
     },
-  ],
-  render: (args: InputProps) => (
-    <Field
-      {...args}
-      component={InputComponent}
-      name="input"
-    />
-  )
-}
-
-export const Error: Story = {
-  args: {
-    placeholder: 'Label',
-    helper: 'Optional helper text',
-    isError: true,
   },
   render: (args: InputProps) => (
-    <Field
-      {...args}
-      component={InputComponent}
-      name="input"
-    />
+    <div className={styles.fields}>
+      <Field
+        {...args}
+        component={InputComponent}
+        name="defualt"
+        placeholder="Default"
+      />
+      <Field
+        {...args}
+        component={InputComponent}
+        name="hover"
+        placeholder="Default"
+        className="hover"
+      />
+      <Field
+        {...args}
+        component={InputComponent}
+        name="focus"
+        placeholder="Default"
+        className="pseudo-focus-within"
+      />
+      <Field
+        {...args}
+        component={InputComponent}
+        name="filled"
+        placeholder="Default"
+      />
+      <Field
+        {...args}
+        component={InputComponent}
+        name="loading"
+        placeholder="Loading"
+        helper="Loading"
+        isLoading
+      />
+      <Field
+        {...args}
+        component={InputComponent}
+        name="ghost"
+        placeholder="Ghost"
+        helper="Ghost"
+        isGhost
+      />
+      <Field
+        {...args}
+        component={InputComponent}
+        name="disabled"
+        placeholder="Disabled"
+        isDisabled
+      />
+      <Field
+        {...args}
+        component={InputComponent}
+        name="error"
+        placeholder="Error"
+        isError
+      />
+      <Field
+        {...args}
+        component={InputComponent}
+        name="error-focus"
+        placeholder="Error Focus"
+        className="pseudo-focus-within"
+        isError
+      />
+      <Field
+        {...args}
+        component={InputComponent}
+        name="leading-icon"
+        placeholder="Leading Icon"
+        leadingIcon="Search"
+      />
+      <Field
+        {...args}
+        component={InputComponent}
+        name="leading-icon-func"
+        placeholder="Leading Icon/Function"
+        leadingIcon="Search"
+        leadingFunction={leadingFunction}
+      />
+      <Field
+        {...args}
+        component={InputComponent}
+        name="leading-text"
+        placeholder="Leading Text"
+        leadingText="£"
+      />
+      <Field
+        {...args}
+        component={InputComponent}
+        name="trailing-icon"
+        placeholder="Trailing Icon"
+        trailingIcon="Home"
+      />
+      <Field
+        {...args}
+        component={InputComponent}
+        name="trailing-function"
+        placeholder="Trailing Icon/Function"
+        trailingIcon="Home"
+        trailingFunction={trailingFunction}
+      />
+      <Field
+        {...args}
+        component={InputComponent}
+        name="password"
+        type="password"
+        placeholder="Password"
+      />
+
+      <Field
+        {...args}
+        component={InputComponent}
+        name="trailing-button"
+        placeholder="Trailing Button"
+        trailingFunction={trailingFunction}
+        trailingButton={{
+          label: 'Button'
+        }}
+      />
+
+      <Field
+        {...args}
+        component={InputComponent}
+        name="trailing-button-icon"
+        placeholder="Trailing Button Icon"
+        trailingButton={{
+          variant: Variant.Success,
+          leadingIcon: 'Home',
+          onClick: () => trailingFunction(),
+        }}
+      />
+    </div>
   )
-}
-
-export const ErrorFocus: Story = {
-  args: {
-    placeholder: 'Label',
-    helper: 'Optional helper text',
-    isFocus: true,
-    isError: true,
-  },
-  render: (args: InputProps) => (
-    <Field
-      {...args}
-      component={InputComponent}
-      name="input"
-    />
-  )
-}
-
-export const LeadingText: Story = {
-  args: {
-    placeholder: 'Label',
-    helper: 'Optional helper text',
-    leadingText: '£',
-  },
-  render: (args: InputProps) => (
-    <Field
-      {...args}
-      component={InputComponent}
-      name="input"
-    />
-  )
-}
-
-export const LeadingIcon: Story = {
-  args: {
-    placeholder: 'Label',
-    helper: 'Optional helper text',
-    leadingIcon: 'AlarmClock',
-    leadingFuction: leadingFuction,
-  },
-  render: (args: InputProps) => (
-    <Field
-      {...args}
-      component={InputComponent}
-      name="input"
-    />
-  )
-}
-
-export const TrailingIcon: Story = {
-  args: {
-    placeholder: 'Label',
-    helper: 'Optional helper text',
-    trailingIcon: 'Home',
-    trailingFuction: trailingFuction,
-  },
-  render: (args: InputProps) => (
-    <Field
-      {...args}
-      component={InputComponent}
-      name="input"
-    />
-  )
-}
-
-export const TrailingIconClear: Story = {
-  args: {
-    placeholder: 'Label',
-    helper: 'Optional helper text',
-    trailingIcon: 'X',
-    trailingFuction: trailingFuction,
-  },
-  render: (args: InputProps) => (
-    <Field
-      {...args}
-      component={InputComponent}
-      name="input"
-    />
-  )
-}
-
-export const Password: Story = {
-  args: {
-    type: 'password',
-    placeholder: 'Label',
-    helper: 'Optional helper text',
-  },
-  render: (args: InputProps) => (
-    <Field
-      {...args}
-      component={InputComponent}
-      name="input"
-    />
-  )
-}
-
-export const NoLabel: Story = {
-  args: {
-    helper: 'Optional helper text',
-  },
-  render: (args: InputProps) => (
-    <Field
-      {...args}
-      component={InputComponent}
-      name="input"
-      helper="Optional helper text"
-    />
-  )
-}
-
-export const Register: Story = {
-  decorators: [
-    (Story) => {
-      const registerShema = z.object({
-        fullName: z
-          .string()
-          .min(2, 'Must be at least 2 characters')
-          .max(50, 'Must be at most 50 characters')
-          .default(''),
-        email: z
-          .string()
-          .email('Invalid email format')
-          .min(5, 'Must be at least 5 characters')
-          .max(50, 'Must be at most 50 characters')
-          .default(''),
-        password: z
-          .string()
-          .min(8, 'Password must be at least 8 characters')
-          .max(50, 'Must be at most 50 characters')
-          .default(''),
-      })
-
-      return (
-        <Formik
-          initialValues={{
-            fullName: '',
-            email: '',
-            password: '',
-          }}
-          validationSchema={toFormikValidationSchema(registerShema)}
-          onSubmit={async (values) => {
-            await new Promise((r) => setTimeout(r, 500));
-            alert(JSON.stringify(values, null, 2));
-          }}
-        >
-          {() => (
-            <Form>
-              <Story />
-            </Form>
-          )}
-        </Formik>
-      )
-    },
-  ],
-  render: (args: InputProps) => {
-
-    return (
-      <div className={styles.fields}>
-        <Field
-          {...args}
-          component={InputComponent}
-          placeholder="Full Name"
-          name="fullName"
-          trailingIcon={'User'}
-        />
-        <Field
-          {...args}
-          component={InputComponent}
-          placeholder="Email Address"
-          name="email"
-          type="email"
-          trailingIcon={'Mail'}
-        />
-        <Field
-          {...args}
-          component={InputComponent}
-          placeholder="Password"
-          name="password"
-          type="password"
-        />
-      </div>
-    )
-  }
 }

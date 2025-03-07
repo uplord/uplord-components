@@ -7,10 +7,16 @@ type AvailableIcons = keyof typeof icons
 export interface IconProps {
   icon: AvailableIcons
   size: SizeType
+  strokeWidth?: number
   className?: string
 }
 
-export function Icon({ icon, size, className = '' }: IconProps) {
+export function Icon({
+  icon,
+  size,
+  strokeWidth = 2,
+  className = ''
+}: IconProps) {
   const LucideIcon = icons[icon] as LucideIcon
 
   let iconSize = 20
@@ -23,5 +29,9 @@ export function Icon({ icon, size, className = '' }: IconProps) {
     iconSize = 24
   }
 
-  return <LucideIcon size={iconSize} className={className} />
+  // if (size === Size.ExtraLarge) {
+  //   iconSize = 24
+  // }
+
+  return <LucideIcon size={iconSize} className={className} strokeWidth={strokeWidth} />
 }

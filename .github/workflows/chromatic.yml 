@@ -1,28 +1,61 @@
-name: "Chromatic Deployment"
+name: Deploy to Chromatic and Publish to NPM
 
 on:
   push:
     branches:
       - main
+      - develop
+    paths-ignore:
+      - "**.md"
+  pull_request:
+    branches:
+      - main
+      - develop
 
 jobs:
   chromatic:
-    name: "Publish Storybook to Chromatic"
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        node-version: [18]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          fetch-depth: 0
+          node-version: 18
+          cache: "npm"
 
       - name: Install dependencies
         run: npm install
 
-      - name: Build Storybook
-        run: npm run build-storybook
+      - name: Deploy to Chromatic
+        run: npx chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }} --branch=${{ github.ref_name }}
 
-      - name: Publish to Chromatic
-        uses: chromaui/action@v1
+  publish:
+    if: github.ref == 'refs/heads/main'
+    needs: chromatic
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          node-version: 18
+          cache: "npm"
+          registry-url: "https://registry.npmjs.org/"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build package
+        run: npm run build-babel
+
+      - name: Publish to NPM
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

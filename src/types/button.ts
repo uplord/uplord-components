@@ -1,34 +1,31 @@
+import React from 'react'
+import { SizeType } from '@/types/size'
 import * as icons from 'lucide-react'
 type AvailableIcons = keyof typeof icons
 
 export enum Variant {
   Text = 'text',
   Default = 'default',
+  Outline = 'outline',
   Primary = 'primary',
   Success = 'success',
+  Error = 'error',
+  Warning = 'warning',
+  Info = 'info',
 }
 
-export interface ButtonProps {
+export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   label?: string
-  size: string
-  variant: string
+  href?: string
+  target?: '_blank' | ''
+  size: SizeType
+  variant: Variant
   className?: string
-  disabled?: boolean
   leadingIcon?: AvailableIcons
   trailingIcon?: AvailableIcons
   isLoading?: boolean
-  onClick?: () => void
+  isDisabled?: boolean
+  isGhost?: boolean
+  // onClick?: () => void
 }
 
-export interface LinkProps {
-  label?: string
-  href: string
-  target?: string
-  size: string
-  variant: string
-  className?: string
-  disabled?: boolean
-  leadingIcon?: AvailableIcons
-  trailingIcon?: AvailableIcons
-  isLoading?: boolean
-}

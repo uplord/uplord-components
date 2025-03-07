@@ -11,22 +11,17 @@ $breakpoint-md: 744px;
 $breakpoint-lg: 1024px;
 $breakpoint-xl: 2032px;
 
-$color-light: #fff;
-$color-dark: #000;
+$color-light: #FFFFFF;
+$color-dark: #222222;
 
 // Primary color scheme
-$color-default: #000;
-$color-default-hover: color.adjust($color-default, $lightness: -10%);
-$color-default-text: #fff;
+$color-default: #F7F7F7;
 
-$color-default-dark: #fff;
-$color-default-hover-dark: color.adjust($color-default-dark, $lightness: 10%);
-$color-default-text-dark: #000;
+// $color-default-dark: #fff;
+// $color-default-hover-dark: color.adjust($color-default-dark, $lightness: 10%);
 
 // Primary color scheme
-$color-primary: #dd2121;
-$color-primary-hover: color.adjust($color-primary, $lightness: -10%);
-$color-primary-text: #fff;
+$color-primary: rebeccapurple;
 
 $color-success: #29a027;
 $color-error: #dd2121;
