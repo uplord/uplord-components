@@ -258,6 +258,11 @@ export const Variants: Story = {
         label="Info"
         variant={Variant.Info}
       />
+      <Button
+        {...args}
+        label="Black"
+        variant={Variant.Black}
+      />
     </ButtonGroup>
   )
 }
@@ -406,6 +411,20 @@ export const Warning: Story = {
 export const Info: Story = {
   args: {
     variant: Variant.Info,
+  },
+  parameters: {
+    controls: {
+      disable: true
+    },
+  },
+  render: (args: ButtonProps) => (
+    <Content {...args} />
+  )
+}
+
+export const Black: Story = {
+  args: {
+    variant: Variant.Black,
   },
   parameters: {
     controls: {

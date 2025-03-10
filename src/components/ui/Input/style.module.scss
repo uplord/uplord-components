@@ -22,7 +22,7 @@ $color-error-02: #C13515;
   width: 100%;
 
   .icon {
-    color: $text-title;
+    color: $color-text;
   }
 }
 
@@ -105,7 +105,7 @@ $color-error-02: #C13515;
   position: relative;
   width: 100%;
   background: transparent;
-  color: $text-title;
+  color: $color-text;
   font-size: 1rem;
   line-height: 1.4375rem;
   transition: all 0.2s ease-in-out;
@@ -127,7 +127,7 @@ $color-error-02: #C13515;
       line-height: 0.875rem;
       padding: 0;
       top: -0.40625rem;
-      color: $text-body;
+      color: $color-text;
     }
   }
 
@@ -175,7 +175,7 @@ $color-error-02: #C13515;
 .text {
   font-size: 1rem;
   line-height: 1.4375rem;
-  color: $text-title;
+  color: $color-text;
 }
 
 .button {
@@ -210,5 +210,5 @@ $color-error-02: #C13515;
   transform: translate(-50%, -50%);
   animation: rotate-loading 2s linear infinite;
   z-index: 1;
-  color: $text-title;
+  color: $color-text;
 }

@@ -12,6 +12,7 @@ export enum Variant {
   Error = 'error',
   Warning = 'warning',
   Info = 'info',
+  Black = 'black',
 }
 
 export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {

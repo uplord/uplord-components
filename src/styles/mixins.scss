@@ -213,6 +213,15 @@
       background-color: color.adjust($color-info, $lightness: -10%);
     }
   }
+
+  &.black {
+    background-color: $color-black;
+    color: $color-light;
+
+    &:hover {
+      background-color: color.adjust($color-black, $lightness: 10%);
+    }
+  }
   
   &.disabled,
   &:disabled {

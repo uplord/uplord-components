@@ -131,6 +131,7 @@ export const Input = ({
           <Button
             label={trailingButton.label}
             leadingIcon={trailingButton.leadingIcon}
+            trailingIcon={trailingButton.trailingIcon}
             size={Size.Small}
             variant={trailingButton.variant || Variant.Primary}
             className={styles.button}

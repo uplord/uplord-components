@@ -65,8 +65,8 @@ const preview = {
       hover: '.hover',
       focus: '.focus',
       active: '.active',
-      'focus-visible': '.focus-visible',
-      'focus-within': '.focus-within',
+      focusVisible: '.focus-visible',
+      focusWithin: '.focus-within',
     },
     chromatic: {
       disableSnapshot: true,
